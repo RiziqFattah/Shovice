@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+	<style>
+    .item1 {
+        grid-area: header;
+    }
+
+    .item2 {
+        grid-area: menu;
+    }
+
+    .item3 {
+        grid-area: main;
+    }
+
+    .item4 {
+        grid-area: right;
+    }
+
+    .item5 {
+        grid-area: footer;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+        
+           
+            'header header header header header header'
+            'menu main main main main main'
+            'menu footer footer footer footer footer';
+        grid-gap: 50px;
+        background-color: #FDF7F6;
+        padding: 5px;
+    }
+
+    .grid-container>div {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+    }
+
+    .btn-def {
+        padding: 3px 10px 5px 10px;
+        border-radius: 5px;
+        /* margin: 10px; */
+    }
+
+    .btn-status {
+        font-size: 10px;
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+    }
+    table {
+  width:100%;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+    #t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t01 th {
+  background-color: black;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div layout:fragment="content">
+<div class="grid-container">
+
+<!--         <div class="item1" style="background-color: #ff5757;"> -->
+<!--             <h1>Home Page</h1> -->
+            
+<!--                 <ul class="navbar-nav ml-auto"> -->
+<!--                     <li class="nav-item active dropdown" th:if="${currentUser}"> -->
+<!--                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${fullName}"></a> -->
+<!--                         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+<!--                              <div class="dropdown-item"> -->
+<!--                                  <form th:action="@{/logout}" method="post"> -->
+<!--                                     <input type="submit" value="Sign Out"/> -->
+<!--                                 </form> -->
+<!--                              </div> -->
+<!--                         </div> -->
+<!--                     </li> -->
+<!--                 </ul> -->
+           
+<!--         </div> -->
+
+        <div class="item2" style="background-color: #FFABAB;">
+            <h2>Menu</h2>
+            <a  th:href="@{'/index/create'}">Add New Request</a> <br><br>
+         <!--    <a href="./requestTaken.html">Request Taken</a><br><br>
+            <a href="./history.html">Request History</a><br><br>
+            <a href="./login.html">Logout</a><br><br> -->
+        </div>
+
+        <div id="item3" class="item3" style="background-color: #DEDBDB">
+        <h2>Request List</h2>
+        <table class="table" id="t01">
+      <tbody>
+      
+      <tr>
+      <th>Request </th>
+      <th>Scope </th>
+      <th>Type </th>
+      <th>Price </th>
+      <th>Location </th>
+      <th> Description </th>
+      </tr>
+      <tr  th:each="request : ${request}">
+		<!-- <td th:text="${request.id}">Request ID</td> -->
+		
+		<td th:text="${request.req_name}">Requester Name</td>
+		<td th:text="${request.scope}">Scope</td>
+		<td th:text="${request.type}">Type</td>
+		<td th:text="${request.price}">Price</td>
+		<td th:text="${request.location}">Location</td>
+		<td th:text="${request.description}">Description</td>	
+				  
+		</tr> 
+   
+  </tbody>  
+        </table>
+      
+        
+        </div>
+
+
+    </div>
+	</div>
+	
+	
+	
+</body>
+</html>

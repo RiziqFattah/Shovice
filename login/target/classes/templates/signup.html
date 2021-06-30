@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+    >
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <!--CSS-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #FF5757;
+            padding: 0 10px;
+        }
+
+        .wrapper {
+            max-width: 600px;
+            width: 100%;
+            height: 700px;
+            background: #F6F6F6;
+            margin: 70px auto;
+            padding: 30px;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
+
+
+        }
+
+        .wrapper .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #FF5757;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .wrapper .form-signin {
+            width: 100%;
+
+        }
+
+        .wrapper .form-signin .input_field {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+
+        }
+
+        .wrapper .form-signin .input_field label {
+            width: 100px;
+            color: #FF5757;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .wrapper .form-signin .input_field .input,
+        .wrapper .form-signin .input_field .textarea
+
+        /* .wrapper .form .input_field .gender { */
+            {
+            width: 100%;
+            outline: none;
+            border: 1px solid #FF5757;
+            font-size: 15px;
+            padding: 8px 10px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper .form-signin .input_field .gender {
+            width: 70px;
+            outline: none;
+            margin-right: 1px;
+            font-size: 10px;
+            /* border-color: #FF5757; */
+            position: relative;
+            /* border: 1px solid #FF5757; */
+        }
+
+        .wrapper .form-signin .input_field .check input[type="radio"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .wrapper .form-signin .input_field .check .checkmark {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #FF5757;
+            display: block;
+            position: relative;
+            /* background: #FF5757; */
+        }
+
+        .wrapper .form-signin .input_field .check .checkmark:before {
+            content: "";
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            width: 5px;
+            height: 2px;
+            border: 2px solid;
+            border-color: transparent transparent #FF5757 #FF5757;
+            transform: rotate(-45deg);
+            display: none;
+
+        }
+
+        .wrapper .form-signin .input_field .check input[type="radio"]:checked~.checkmark:before {
+            display: block;
+
+
+        }
+
+        .wrapper .form-signin .input_field .textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        .wrapper .form-signin .input_field .custom_select {
+            position: relative;
+            width: 100%;
+            height: 37px;
+
+        }
+
+        .wrapper .form-signin .input_field .custom_select select {
+            appearance: none;
+            border: 1px solid #FF5757;
+            width: 100%;
+            height: 100%;
+            padding: 8px 10px;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .wrapper .form-signin .input_field .input:focus,
+        .wrapper .form-signin .input_field .textarea:focus,
+        .wrapper .form-signin .input_field select:focus {
+            border: 1px solid #C0CCDA;
+        }
+
+        .wrapper .form-signin .input_field p {
+            font-size: 14px;
+            color: #FF5757;
+
+        }
+
+        .wrapper .form-signin .input_field .check {
+            width: 15px;
+            height: 15px;
+            position: relative;
+            display: block;
+            cursor: pointer;
+        }
+
+        .wrapper .form-signin .input_field .check input[type="checkbox"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .wrapper .form-signin .input_field .check .checkmark {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #FF5757;
+            display: block;
+            position: relative;
+            /* background: #FF5757; */
+        }
+
+        .wrapper .form-signin .input_field .check .checkmark:before {
+            content: "";
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            width: 5px;
+            height: 2px;
+            border: 2px solid;
+            border-color: transparent transparent #FF5757 #FF5757;
+            transform: rotate(-45deg);
+            display: none;
+
+        }
+
+        
+        .wrapper .form-signin .input_field .check input[type="checkbox"]:checked~.checkmark:before {
+            display: block;
+
+
+        }
+
+        .wrapper .form-signin .input_field .btn {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 15px;
+            border: 0;
+            background: #FF5757;
+            color: black;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .wrapper .form-signin .input_field:last-child {
+            margin-bottom: 0;
+
+        }
+
+        .wrapper .form-signin .input_field .btn:hover {
+            background: #C0CCDA;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title">
+            Registration Form
+        </div>
+        <form class="form-signin" th:action="@{/signup}" method="post">
+            <div th:if="${param.error}">
+                Invalid email and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <div class="input_field">
+                <label>Name</label>
+                <input type="text" name="fullname" id="inputFullName" class="form-control" required />
+            </div>
+            <div class="input_field">
+                <label>Matric No</label>
+                <input type="text" name="matric" id="inputMatric" class="form-control" required />
+            </div>
+            <div class="input_field">
+                <label>Phone Number</label>
+                <input type="text" name="phone" id="inputPhone" class="form-control" required />
+            </div>
+            <div class="input_field">
+                <label>Email</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" required />
+            </div>
+            <div class="input_field">
+                <label>Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" required />
+            </div>
+           
+            
+            <div class="input_field">
+                <label>Gender</label>
+                <label class="genders">Male
+                    <input type="radio" name="gender" value="Male">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="genders">Female
+                    <input type="radio" name="gender" value="Female">
+                    <span class="checkmark"></span>
+                </label>
+                
+
+            </div>
+            <div class="input_field">
+                <label>Address</label>
+                <input type="text" class="form-control" style="height:90px" name="address">
+            </div>
+            <div class="input_field">
+                <label>Faculty</label>
+                <div class="custom_select">
+                    <select name="faculty">
+                        <option value="">Select</option>
+                        <option value="Faculty of Science">Faculty of Science</option>
+                        <option value="Faculty of Built Environment and Surveying">Faculty of Built Environment and
+                            Surveying</option>
+                        <option value="Razak Faculty of Technology and Informatics">Razak Faculty of Technology and
+                            Informatics</option>
+                        <option value="Azman Hashim International Business School">Azman Hashim International Business
+                            School</option>
+                        <option value="Faculty Engineering">Faculty Engineering</option>
+                        <option value="Malaysia-Japan International Institute of Technology">Malaysia-Japan
+                            International Institute of Technology</option>
+                        <option value="School of Prefessional & Continuing Education (SPACE)">School of Prefessional &
+                            Continuing Education (SPACE)</option>
+                        <option value="Faculty of Social Science and Huminities">Faculty of Social Science and
+                            Huminities</option>
+
+                    </select>
+                </div>
+
+
+
+            </div>
+            
+            
+            <div class="input_field">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+            </div>
+    </form>
+    <br>
+    <form class="form-signin" th:action="@{/login}" method="get">
+        <button class="btn btn-md btn-success btn-block" type="Submit">Sign In</button>
+    </form>
+   </div>
+</body>
+
+</html>
